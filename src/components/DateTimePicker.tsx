@@ -98,72 +98,72 @@ export function DateTimePicker({ date, onDateChange, placeholder = "Pick a date 
         <Button
           variant="outline"
           className={cn(
-            "w-full justify-start text-left font-normal border-border/50 hover:border-primary transition-smooth",
+            "w-full justify-start text-left font-bold border-border/50 hover:border-primary transition-bounce hover:scale-105 bg-card/50 backdrop-blur-sm shadow-aggressive hover:shadow-hover-aggressive",
             !date && "text-muted-foreground"
           )}
         >
-          <CalendarIcon className="mr-2 h-4 w-4" />
+          <CalendarIcon className="mr-2 h-5 w-5" />
           {date ? (
-            <span className="flex items-center gap-2">
+            <span className="flex items-center gap-3 font-semibold">
               <span>{format(date, "PPP")}</span>
-              <Clock className="h-3 w-3" />
-              <span>{format(date, "HH:mm")}</span>
+              <Clock className="h-4 w-4 text-primary" />
+              <span className="text-primary">{format(date, "HH:mm")}</span>
             </span>
           ) : (
-            <span>{placeholder}</span>
+            <span className="font-medium tracking-wide">{placeholder}</span>
           )}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto p-0 border-border/50" align="start">
-        <div className="p-3 space-y-3">
+      <PopoverContent className="w-auto p-0 border-border/50 bg-card/95 backdrop-blur-md shadow-aggressive" align="start">
+        <div className="p-4 space-y-4">
           <Calendar
             mode="single"
             selected={date}
             onSelect={handleDateSelect}
             initialFocus
-            className="pointer-events-auto"
+            className="pointer-events-auto font-semibold"
           />
-          <div className="border-t pt-3 space-y-3">
+          <div className="border-t border-border/50 pt-4 space-y-4">
             <div className="flex items-center justify-between">
-              <Label className="text-sm font-medium">Time</Label>
+              <Label className="text-sm font-bold tracking-wide text-primary">⚡ TIME SELECTION</Label>
               <div className="flex gap-1">
                 <Button
                   type="button"
                   variant={timeMode === "preset" ? "default" : "ghost"}
                   size="sm"
                   onClick={() => setTimeMode("preset")}
-                  className="h-6 px-2 text-xs"
+                  className="h-7 px-3 text-xs font-bold transition-bounce hover:scale-105"
                 >
-                  Presets
+                  PRESETS
                 </Button>
                 <Button
                   type="button"
                   variant={timeMode === "manual" ? "default" : "ghost"}
                   size="sm"
                   onClick={() => setTimeMode("manual")}
-                  className="h-6 px-2 text-xs"
+                  className="h-7 px-3 text-xs font-bold transition-bounce hover:scale-105"
                 >
-                  Manual
+                  MANUAL
                 </Button>
               </div>
             </div>
 
             {timeMode === "preset" ? (
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <Select value={timeValue} onValueChange={handlePresetTimeSelect}>
-                  <SelectTrigger className="w-full border-border/50">
-                    <Clock className="h-4 w-4 text-muted-foreground mr-2" />
-                    <SelectValue placeholder="Select time slot" />
+                  <SelectTrigger className="w-full border-border/50 bg-input/50 font-semibold hover:border-primary transition-smooth">
+                    <Clock className="h-4 w-4 text-primary mr-2" />
+                    <SelectValue placeholder="SELECT TIME SLOT" />
                   </SelectTrigger>
-                  <SelectContent className="max-h-60">
+                  <SelectContent className="max-h-60 bg-card/95 backdrop-blur-md border-border/50">
                     {TIME_SLOTS.map((slot) => (
-                      <SelectItem key={slot.value} value={slot.value}>
+                      <SelectItem key={slot.value} value={slot.value} className="font-semibold hover:bg-primary/10">
                         {slot.label}
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
-                <div className="grid grid-cols-3 gap-1">
+                <div className="grid grid-cols-3 gap-2">
                   {TIME_SLOTS.slice(0, 12).map((slot) => (
                     <Button
                       key={slot.value}
@@ -171,7 +171,7 @@ export function DateTimePicker({ date, onDateChange, placeholder = "Pick a date 
                       variant={timeValue === slot.value ? "default" : "ghost"}
                       size="sm"
                       onClick={() => handlePresetTimeSelect(slot.value)}
-                      className="h-8 text-xs"
+                      className="h-9 text-xs font-bold transition-bounce hover:scale-105"
                     >
                       {slot.label}
                     </Button>
@@ -179,13 +179,13 @@ export function DateTimePicker({ date, onDateChange, placeholder = "Pick a date 
                 </div>
               </div>
             ) : (
-              <div className="flex items-center gap-2">
-                <Clock className="h-4 w-4 text-muted-foreground" />
+              <div className="flex items-center gap-3">
+                <Clock className="h-5 w-5 text-primary" />
                 <Input
                   type="time"
                   value={timeValue}
                   onChange={(e) => handleTimeChange(e.target.value)}
-                  className="flex-1 border-border/50"
+                  className="flex-1 border-border/50 bg-input/50 font-bold text-lg hover:border-primary transition-smooth"
                   step="300" // 5-minute intervals
                 />
               </div>
@@ -194,10 +194,10 @@ export function DateTimePicker({ date, onDateChange, placeholder = "Pick a date 
           {date && (
             <Button
               onClick={handleDateTimeSet}
-              className="w-full bg-gradient-primary hover:opacity-90 transition-smooth"
-              size="sm"
+              className="w-full bg-gradient-primary hover:scale-105 transition-bounce shadow-aggressive hover:shadow-hover-aggressive font-bold text-lg tracking-wide"
+              size="lg"
             >
-              Set Date & Time
+              ⚡ LOCK IN TIME ⚡
             </Button>
           )}
         </div>

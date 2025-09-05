@@ -28,26 +28,29 @@ export function DeleteConfirmDialog({
 }: DeleteConfirmDialogProps) {
   return (
     <AlertDialog open={isOpen} onOpenChange={onOpenChange}>
-      <AlertDialogContent className="border-border/50">
+      <AlertDialogContent className="border-border/50 bg-card/95 backdrop-blur-md shadow-aggressive font-rajdhani">
         <AlertDialogHeader>
-          <AlertDialogTitle className="flex items-center gap-2">
-            <Trash2 className="h-5 w-5 text-destructive" />
-            Delete {itemType}
+          <AlertDialogTitle className="flex items-center gap-3 text-xl font-orbitron font-black tracking-wide">
+            <Trash2 className="h-6 w-6 text-destructive animate-pulse-glow" />
+            🗲 TERMINATE {itemType.toUpperCase()}
           </AlertDialogTitle>
-          <AlertDialogDescription className="text-left">
-            Are you sure you want to delete <strong>"{itemName}"</strong>? 
-            This action cannot be undone.
+          <AlertDialogDescription className="text-left text-lg font-medium text-muted-foreground leading-relaxed">
+            Are you absolutely certain you want to <span className="text-destructive font-bold">PERMANENTLY DELETE</span> this {itemType}?
+            <br />
+            <span className="text-primary font-bold text-xl">"{itemName}"</span>
+            <br />
+            <span className="text-destructive font-bold">⚠ THIS ACTION IS IRREVERSIBLE ⚠</span>
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel className="border-border/50">
-            Cancel
+        <AlertDialogFooter className="gap-4">
+          <AlertDialogCancel className="border-border/50 hover:bg-muted/50 transition-bounce hover:scale-105 font-bold tracking-wide">
+            ABORT MISSION
           </AlertDialogCancel>
           <AlertDialogAction 
             onClick={onConfirm}
-            className="bg-destructive text-destructive-foreground hover:bg-destructive/90 transition-smooth"
+            className="bg-gradient-danger text-white hover:scale-110 transition-bounce shadow-aggressive hover:shadow-hover-aggressive font-bold tracking-wider"
           >
-            Delete {itemType}
+            🗲 DESTROY {itemType.toUpperCase()}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
